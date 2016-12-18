@@ -1,8 +1,9 @@
 local skynet = require "skynet"
 local netpack = require "netpack"
 local socket = require "socket"
---local sproto = require "sproto"
---local sprotoloader = require "sprotoloader"
+local sproto = require "sproto"
+
+local sp = sproto.parse(require("protocol/proto"))
 
 local WATCHDOG
 local CMD = {}
@@ -13,23 +14,21 @@ skynet.register_protocol {
 	name = "client",
 	id = skynet.PTYPE_CLIENT,
 	unpack = skynet.tostring,
-	dispatch = function (session, source, type, ...)
-		print("client=======",session,source,type)
-		socket.write(client_fd, "hello")
-		--print("=======",type)
-		-- if type == "REQUEST" then
-		-- 	local ok, result  = pcall(request, ...)
-		-- 	if ok then
-		-- 		if result then
-		-- 			send_package(result)
-		-- 		end
-		-- 	else
-		-- 		skynet.error(result)
-		-- 	end
-		-- else
-		-- 	assert(type == "RESPONSE")
-		-- 	error "This example doesn't support request client"
-		-- end
+	dispatch = function (session, source, msg, ...)
+		print("recv client msg:",session,source)
+		print("type=[%s]",type(msg))
+		local param = sp:decode("HelloMsg",msg)
+		Log.d("agent","=============")
+		Log.dump("agent",param)
+		Log.d("agent","=============")
+
+		local res = {}
+		res.name = "gameServer"
+		res.content = "hello over!"
+		local response = sp:encode("Answer", res)
+
+		print(string.format("response packet => size: %s", string.len(response)))
+		socket.write(client_fd, string.pack("<I2", string.len(response)) .. response)
 	end
 }
 
