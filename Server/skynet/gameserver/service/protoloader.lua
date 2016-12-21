@@ -4,7 +4,7 @@ package.path = "./examples/?.lua;" .. package.path
 local skynet = require "skynet"
 local sprotoparser = require "sprotoparser"
 local sprotoloader = require "sprotoloader"
-local proto = require "proto"
+local proto = require('protocol/proto')
 
 skynet.start(function()
 	sprotoloader.save(proto.c2s, 1)

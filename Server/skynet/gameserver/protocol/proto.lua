@@ -16,7 +16,8 @@ login 1 {
     response {
         status 0 : integer
         msg 1 : string
-        username 2: string
+        username 2 : string
+        ontable 3 : boolean
     }
 }
 
@@ -24,6 +25,17 @@ createRoom 2 {
     request {
         level 0 : integer
         playtype 1 : integer
+    }
+    response {
+        status 0 : integer
+        fid    1 : string
+    }
+}
+
+joinRoom 3 {
+    request {
+        uid 0 : string 
+        fid 1 : string 
     }
     response {
         status 0 : integer

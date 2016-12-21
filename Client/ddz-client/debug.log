@@ -22,7 +22,7 @@
 
 Quick-Cocos2dx-Community C++ support ready.
 ------------------------------------------------
-LOAD LUA FILE: /Users/tanzhenyu/Desktop/quickPro/zjh/src/main.lua
+LOAD LUA FILE: /Users/tanzhenyu/Desktop/DDZProject/Client/ddz-client/src/main.lua
 ------------------------------------------------
 [LUA-print] ===========================================================
 [LUA-print]               LOAD QUICK FRAMEWORK
@@ -33,7 +33,7 @@ LOAD LUA FILE: /Users/tanzhenyu/Desktop/quickPro/zjh/src/main.lua
 [LUA-print] [INFO] # device.platform              = mac
 [LUA-print] [INFO] # device.model                 = unknown
 [LUA-print] [INFO] # device.language              = cn
-[LUA-print] [INFO] # device.writablePath          = /Users/tanzhenyu/Desktop/quickPro/zjh/
+[LUA-print] [INFO] # device.writablePath          = /Users/tanzhenyu/Desktop/DDZProject/Client/ddz-client/
 [LUA-print] [INFO] # device.directorySeparator    = /
 [LUA-print] [INFO] # device.pathSeparator         = :
 [LUA-print] [INFO] #
@@ -41,9 +41,9 @@ libpng warning: iCCP: known incorrect sRGB profile
 [LUA-print] [INFO] # CONFIG_SCREEN_AUTOSCALE      = FIXED_WIDTH
 [LUA-print] [INFO] # CONFIG_SCREEN_WIDTH          = 640.00
 [LUA-print] [INFO] # CONFIG_SCREEN_HEIGHT         = 960.00
-[LUA-print] [INFO] # display.widthInPixels        = 320.00
-[LUA-print] [INFO] # display.heightInPixels       = 480.00
-[LUA-print] [INFO] # display.contentScaleFactor   = 0.50
+[LUA-print] [INFO] # display.widthInPixels        = 640.00
+[LUA-print] [INFO] # display.heightInPixels       = 960.00
+[LUA-print] [INFO] # display.contentScaleFactor   = 1.00
 [LUA-print] [INFO] # display.width                = 640.00
 [LUA-print] [INFO] # display.height               = 960.00
 [LUA-print] [INFO] # display.cx                   = 320.00
@@ -58,57 +58,14 @@ libpng warning: iCCP: known incorrect sRGB profile
 [LUA-print] [INFO] # display.c_bottom             = -480.00
 [LUA-print] [INFO] #
 [LUA-print] [INFO] socket status: SOCKET_TCP_CONNECTED
-[LUA-print] packet => size: 51
-[LUA-print] dump from: [string "/Users/tanzhenyu/Desktop/quickPro/zjh/src/app/scenes/MainScene.lua"]:70: in function 'send2Socket'
-[LUA-print] - "<Send MSG to Server:>" = {
-[LUA-print] -     "bools" = {
-[LUA-print] -         1 = true
-[LUA-print] -         2 = false
-[LUA-print] -         3 = false
-[LUA-print] -         4 = true
-[LUA-print] -     }
-[LUA-print] -     "content" = "hello,world!"
-[LUA-print] -     "number"  = 10
-[LUA-print] -     "user" = {
-[LUA-print] -         "age"  = 1
-[LUA-print] -         "name" = "ddz"
-[LUA-print] -     }
-[LUA-print] - }
 [LUA-print] [INFO] socket receive raw data:
-[LUA-print] 35	0	2	0	0	0	0	0	10	0	0	0	103	97	109	101	83	101	114	118	101	114	11	0	0	0	104	101	108	108	111	32	111	118	101	114	33
-[LUA-print] packet => size: 35
-[LUA-print] dump from: [string "/Users/tanzhenyu/Desktop/quickPro/zjh/src/app/scenes/MainScene.lua"]:90: in function <[string "/Users/tanzhenyu/Desktop/quickPro/zjh/src/app/scenes/MainScene.lua"]:79>
+[LUA-print] 0	36	85	2	1	4	4	65	4	2	241	14	76	111	103	105	255	0	110	32	83	117	99	99	101	115	199	115	33	7	122	97	31	105	110	116	97	110
+[LUA-print] packet => size: 36
+[LUA-print] RESPONSE	1	table	nil
+[LUA-print] dump from: [string "/Users/tanzhenyu/Desktop/DDZProject/Client/ddz-client/src/app/scenes/MainScene.lua"]:102: in function <[string "/Users/tanzhenyu/Desktop/DDZProject/Client/ddz-client/src/app/scenes/MainScene.lua"]:89>
 [LUA-print] - "<recv MSG from Server:>" = {
-[LUA-print] -     "content" = "hello over!"
-[LUA-print] -     "name"    = "gameServer"
+[LUA-print] -     "msg"      = "Login Success!"
+[LUA-print] -     "ontable"  = false
+[LUA-print] -     "status"   = 1
+[LUA-print] -     "username" = "zaintan"
 [LUA-print] - }
-[LUA-print] [INFO] socket status: SOCKET_TCP_CLOSE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CLOSED
-[LUA-print] [INFO] socket status: SOCKET_TCP_CLOSE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CONNECT_FAILURE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CLOSE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CONNECT_FAILURE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CLOSE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CONNECT_FAILURE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CLOSE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CONNECT_FAILURE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CLOSE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CONNECT_FAILURE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CLOSE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CONNECT_FAILURE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CLOSE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CONNECT_FAILURE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CLOSE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CONNECT_FAILURE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CLOSE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CONNECT_FAILURE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CLOSE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CONNECT_FAILURE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CLOSE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CONNECT_FAILURE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CLOSE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CONNECT_FAILURE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CLOSE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CONNECT_FAILURE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CLOSE
-[LUA-print] [INFO] socket status: SOCKET_TCP_CONNECT_FAILURE

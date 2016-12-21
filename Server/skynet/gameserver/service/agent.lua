@@ -1,55 +1,81 @@
 local skynet = require "skynet"
 local netpack = require "netpack"
 local socket = require "socket"
-local sproto = require "sproto"
 
-local sp = sproto.parse(require("protocol/proto"))
+local sproto = require "sproto"
+local sprotoloader = require "sprotoloader"
 
 local WATCHDOG
+local host
+local send_request
+
 local CMD = {}
+local REQUEST = {}
 local client_fd
-local GameTable
+
+
+function REQUEST:login()
+	skynet.sleep(100)
+	return {status = 1,msg = "Login Success!",username = "zaintan",ontable = false}
+end 
+
+function REQUEST:createRoom()
+	return {status = 1, fid = "100000"}
+end 
+
+function REQUEST:joinRoom()
+	return {status = 1, fid = "100000"}
+end
+
+local function request(name, args, response)
+	local f = assert(REQUEST[name])
+	local r = f(args)
+	if response then
+		return response(r)
+	end
+end
+
+local function send_package(pack)
+	local package = string.pack(">s2", pack)
+	socket.write(client_fd, package)
+end
+
 
 skynet.register_protocol {
 	name = "client",
 	id = skynet.PTYPE_CLIENT,
-	unpack = skynet.tostring,
-	dispatch = function (session, source, msg, ...)
-		print("recv client msg:",session,source)
-		print("type=[%s]",type(msg))
-		local param = sp:decode("HelloMsg",msg)
-		Log.d("agent","=============")
-		Log.dump("agent",param)
-		Log.d("agent","=============")
-
-		local res = {}
-		res.name = "gameServer"
-		res.content = "hello over!"
-		local response = sp:encode("Answer", res)
-
-		print(string.format("response packet => size: %s", string.len(response)))
-		socket.write(client_fd, string.pack("<I2", string.len(response)) .. response)
+	unpack = function(msg, sz)
+		return host:dispatch(msg,sz)
+	end,
+	dispatch = function (session, source, type, ...)
+		if type == "REQUEST" then 
+			local ok,result = pcall(request, ...)
+			if ok then 
+				if result then
+					send_package(result) 
+				end 
+			else
+				skynet.error(result) 
+			end 
+		else 
+			assert(type == "RESPONSE")
+			error "doesn't support request client"
+		end
 	end
 }
 
 function CMD.start(conf)
-	local fd = conf.client
-	local gate = conf.gate
-	WATCHDOG = conf.watchdog
-
-	client_fd = fd
-	skynet.call(gate, "lua", "forward", fd)
+	host = sprotoloader.load(1):host "package"
+	client_fd  = conf.client
+	WATCHDOG   = conf.watchdog
+	skynet.call(conf.gate, "lua", "forward", client_fd)
 end
 
 function CMD.disconnect()
 	-- todo: do something before exit
 	skynet.exit()
 end
-
---test
-function CMD.testLa()
-	skynet.sleep(10)
-end 
+ 
 
 skynet.start(function()
 	skynet.dispatch("lua", function(_,_, command, ...)

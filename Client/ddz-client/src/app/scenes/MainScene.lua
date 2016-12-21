@@ -50,44 +50,34 @@ function MainScene:onStatus(__event)
     end 
 end
 
-function MainScene:send2Socket(__msg)
-     -- sproto 简单测试
-    local sproto = require "lualib.sproto.sproto"
-    local protocol = require "app.protocol.messageDef"
-    local sp = sproto.parse(protocol)
+-- sproto 简单测试
+local session = 0
+local proto  = require "app.protocol.messageDef"
+local sproto = require "lualib.sproto.sproto"
+local host = sproto.new(proto.c2s):host "package"
+local request = host:attach(sproto.new(proto.c2s))
 
-    local data = {}
-    data.content = "hello,world!"
-    data.bools   = {true,false,false,true}
-    data.number  = 10 
-    data.user    = { age = 1, name = "ddz"}
-
-    local packet = sp:encode("HelloMsg", data)
-    print(string.format("packet => size: %s", #packet))
-
-    
-    local dd = sp:decode("HelloMsg", packet)
-    dump(dd,"<Send MSG to Server:>")
+local function send_request(socketTcp,name, args)
+    session = session + 1
+    local packet = request(name, args, session)
 
     local ba = cc.utils.ByteArray.new(cc.utils.ByteArray.ENDIAN_BIG)
-    ba:writeShort(#packet)
+    ba:writeShort(#packet)   
+    socketTcp:send(ba:getBytes() ..packet)
+end 
 
-
-    self.m_socketTcp:send(ba:getBytes()..packet)
+function MainScene:send2Socket(__msg)
+    send_request(self.m_socketTcp,"login",{smid = "zainmac1990",type = 1})
 end
 
 function MainScene:onData(__event)
 	printInfo("socket receive raw data:",__event.data)--, cc.utils.ByteArray.toString(__event.data, 16))
 	print(__event.data:byte(1,string.len(__event.data)))
 
-         -- sproto 简单测试
-    local sproto = require "lualib.sproto.sproto"
-    local protocol = require "app.protocol.messageDef"
-    local sp = sproto.parse(protocol)
-
-    print(string.format("packet => size: %s", #__event.data - 2))
-    local dd = sp:decode("Answer", string.sub(__event.data,3))
-    dump(dd,"<recv MSG from Server:>")
+    local rtype,session,result,headerud = host:dispatch(string.sub(__event.data,3),#__event.data - 2)
+    -- sproto 简单测试
+    print(rtype,session,type(result),headerud)
+    dump(result,"<recv MSG from Server:>")
 end
 
 return MainScene
