@@ -4,7 +4,9 @@ local socket = require "socket"
 
 local sproto = require "sproto"
 local sprotoloader = require "sprotoloader"
+local queue = require("skynet.queue")
 
+local cs = queue()
 local WATCHDOG
 local host
 local send_request
@@ -15,11 +17,15 @@ local client_fd
 
 
 function REQUEST:login()
-	skynet.sleep(100)
+	print("login sleep before")
+	skynet.sleep(500)
+	print("login sleep end")
 	return {status = 1,msg = "Login Success!",username = "zaintan",ontable = false}
 end 
 
 function REQUEST:createRoom()
+	print("createRoom sleep before")
+	--skynet.sleep(200)
 	return {status = 1, fid = "100000"}
 end 
 
@@ -41,26 +47,36 @@ local function send_package(pack)
 end
 
 
+local function recv_package(type, ... )
+	print("recv_package:",type)
+	if type == "REQUEST" then 
+		local ok,result = pcall(request, ...)
+		if ok then 
+			if result then
+				send_package(result) 
+			end 
+		else
+			skynet.error(result) 
+		end 
+	else 
+		assert(type == "RESPONSE")
+		error "doesn't support request client"
+	end
+end 
+
+--##bug: 测试 发现 非按序处理
 skynet.register_protocol {
 	name = "client",
 	id = skynet.PTYPE_CLIENT,
 	unpack = function(msg, sz)
 		return host:dispatch(msg,sz)
 	end,
-	dispatch = function (session, source, type, ...)
-		if type == "REQUEST" then 
-			local ok,result = pcall(request, ...)
-			if ok then 
-				if result then
-					send_package(result) 
-				end 
-			else
-				skynet.error(result) 
-			end 
-		else 
-			assert(type == "RESPONSE")
-			error "doesn't support request client"
-		end
+	dispatch = function (session, source, type, result,response,headerud)
+		print("recieve client :", session, type, result,response,headerud)
+		cs(recv_package,type,result,response,headerud)
+		--cs(function()
+		--	recv_package(type,result,response,headerud)
+		--end)
 	end
 }
 

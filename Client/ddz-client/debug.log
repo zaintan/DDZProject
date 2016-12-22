@@ -58,14 +58,18 @@ libpng warning: iCCP: known incorrect sRGB profile
 [LUA-print] [INFO] # display.c_bottom             = -480.00
 [LUA-print] [INFO] #
 [LUA-print] [INFO] socket status: SOCKET_TCP_CONNECTED
+[LUA-print] send_request:	login	1
+[LUA-print] send_request:	createRoom	2
 [LUA-print] [INFO] socket receive raw data:
-[LUA-print] 0	36	85	2	1	4	4	65	4	2	241	14	76	111	103	105	255	0	110	32	83	117	99	99	101	115	199	115	33	7	122	97	31	105	110	116	97	110
-[LUA-print] packet => size: 36
-[LUA-print] RESPONSE	1	table	nil
-[LUA-print] dump from: [string "/Users/tanzhenyu/Desktop/DDZProject/Client/ddz-client/src/app/scenes/MainScene.lua"]:102: in function <[string "/Users/tanzhenyu/Desktop/DDZProject/Client/ddz-client/src/app/scenes/MainScene.lua"]:89>
+[LUA-print] dump from: [string "/Users/tanzhenyu/Desktop/DDZProject/Client/ddz-client/src/app/scenes/MainScene.lua"]:111: in function 'recvPacketFromServer'
 [LUA-print] - "<recv MSG from Server:>" = {
 [LUA-print] -     "msg"      = "Login Success!"
 [LUA-print] -     "ontable"  = false
 [LUA-print] -     "status"   = 1
 [LUA-print] -     "username" = "zaintan"
+[LUA-print] - }
+[LUA-print] dump from: [string "/Users/tanzhenyu/Desktop/DDZProject/Client/ddz-client/src/app/scenes/MainScene.lua"]:111: in function 'recvPacketFromServer'
+[LUA-print] - "<recv MSG from Server:>" = {
+[LUA-print] -     "fid"    = "100000"
+[LUA-print] -     "status" = 1
 [LUA-print] - }

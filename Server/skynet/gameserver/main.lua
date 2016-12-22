@@ -19,5 +19,5 @@ skynet.start(function()
 		nodelay = true,
 	})
 	skynet.error("Watchdog listen on", 10101)
-	--skynet.exit()
+	skynet.exit()
 end)
