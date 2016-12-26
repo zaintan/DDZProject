@@ -57,18 +57,17 @@ libpng warning: iCCP: known incorrect sRGB profile
 [LUA-print] [INFO] # display.c_top                = 480.00
 [LUA-print] [INFO] # display.c_bottom             = -480.00
 [LUA-print] [INFO] #
-[LUA-print] [INFO] socket status: SOCKET_TCP_CONNECTED
-[LUA-print] send_request:	login	1
-[LUA-print] send_request:	createRoom	2
-[LUA-print] [INFO] socket receive raw data:
-[LUA-print] dump from: [string "/Users/tanzhenyu/Desktop/DDZProject/Client/ddz-client/src/app/scenes/MainScene.lua"]:111: in function 'recvPacketFromServer'
+[LUA-print] [INFO] start connecting ip=[127.0.0.1], port=[10101]
+[LUA-print] [INFO] _onStatusConnected
+[LUA-print] [INFO] socket status: SM_SOCKET_CONNECTED
+[LUA-print] dump from: [string "/Users/tanzhenyu/Desktop/DDZProject/Client/ddz-client/src/app/scenes/MainScene.lua"]:58: in function 'recvPacketFromServer'
 [LUA-print] - "<recv MSG from Server:>" = {
 [LUA-print] -     "msg"      = "Login Success!"
 [LUA-print] -     "ontable"  = false
 [LUA-print] -     "status"   = 1
 [LUA-print] -     "username" = "zaintan"
 [LUA-print] - }
-[LUA-print] dump from: [string "/Users/tanzhenyu/Desktop/DDZProject/Client/ddz-client/src/app/scenes/MainScene.lua"]:111: in function 'recvPacketFromServer'
+[LUA-print] dump from: [string "/Users/tanzhenyu/Desktop/DDZProject/Client/ddz-client/src/app/scenes/MainScene.lua"]:58: in function 'recvPacketFromServer'
 [LUA-print] - "<recv MSG from Server:>" = {
 [LUA-print] -     "fid"    = "100000"
 [LUA-print] -     "status" = 1

@@ -44,13 +44,13 @@ joinRoom 3 {
 
 ]]
 
-proto.s2c = sprotoparser.parse [[
-.package {
-    type 0 : integer
-    session 1 : integer
-}
+-- proto.s2c = sprotoparser.parse [[
+-- .package {
+--     type 0 : integer
+--     session 1 : integer
+-- }
 
-heartbeat 1 {}
-]]
+-- heartbeat 1 {}
+-- ]]
 
 return proto
