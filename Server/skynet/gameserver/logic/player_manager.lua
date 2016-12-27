@@ -9,16 +9,16 @@ function player_manager.get_instance( )
 	return player_manager.m_instance;
 end
 
-function player_manager.ctor( ... )
+function player_manager:ctor( ... )
 	-- body
 	player_manager.init(self);
 end
 
-function player_manager.dtor( ... )
+function player_manager:dtor( ... )
 	-- body
 end
 
-function player_manager.init( ... )
+function player_manager:init( ... )
 	-- body
 	self.m_players = {};
 end
