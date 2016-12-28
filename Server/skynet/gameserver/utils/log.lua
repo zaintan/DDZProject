@@ -6,6 +6,11 @@ Log.LV_WARN = 2
 Log.LV_INFO = 3
 Log.LV_DEBUG = 4
 
+Log.tag = {
+    default = 0,
+    game_round = 1,
+}
+
 local function format_msg(level, tag, fmt, ...)
     local time_info = os.date("%X",os.time())
     local debug_info = debug.getinfo(3)
