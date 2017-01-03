@@ -61,6 +61,14 @@ ps: `--`很重要,没有`--`,就变了切换分支命令
 5. 在本地仓库根目录下 命令行输入`git remote add origin git@github.com:zaintan/DDZProject.git`   这样就将本地仓库与远程仓库关联起来了 
 6. 使用命令`git push -u origin master` 第一次推送master分支的所有内容 以后的提交不必再加-u参数
 
+
+##fork 同步到远程的上游仓库
+git remote -v    ##确认远程状态
+git remote add upstream https://github.com/zaintan/DDZProject  ##确定一个将被同步给 fork 远程的上游仓库
+git fetch upstream          ##从上游仓库 fetch 分支和提交点，提交给本地 master，并会被存储在一个本地分支 upstream/master
+git checkout master         ##切换到本地主分支(如果不在的话) 
+git merge upstream/master   ##把 upstream/master 分支合并到本地 master 上，这样就完成了同步，并且不会丢掉本地修改的内容。
+
 ####从远程仓库下载
 使用`git clone https://github.com/zaintan/DDZProject.git`命令
 

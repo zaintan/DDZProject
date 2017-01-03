@@ -1,8 +1,13 @@
-####tasklist
+﻿####tasklist
 #####基础框架
 - mvc搭建
-- 网络库,消息机制封装
-- 弹窗管理
+- 网络库,消息机制封装  --振宇
+- 弹窗管理 层级管理
+- 客户端本地数据固化
+- ui封装，希望提供更多的接口，比如setText,setVisible等
+- 定时器Timer.lua(已有)
+- 事件EventProtocol.lua（已有）
+- 状态机StateMachine.lua（已有）
 
 #####功能
 1. 登录----游客+微信

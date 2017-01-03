@@ -2,6 +2,7 @@
 require("config")
 require("cocos.init")
 require("framework.init")
+require("app.common.init")
 
 local MyApp = class("MyApp", cc.mvc.AppBase)
 
