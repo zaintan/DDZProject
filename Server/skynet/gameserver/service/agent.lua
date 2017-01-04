@@ -15,7 +15,7 @@ local CMD = {}
 local REQUEST = {}
 local client_fd
 
-
+--login..根据client传过来simid(唯一标识) 找到账号信息
 function REQUEST:login()
 	print("login sleep before")
 	skynet.sleep(500)
