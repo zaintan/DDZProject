@@ -2,8 +2,8 @@
 	@desc:数据层基础类
 ]]
 
-BaseModel = class("BaseModel", ModelBase)
+BaseModel = class("BaseModel", cc.mvc.ModelBase)
 
 function BaseModel:ctor(  )
-	ModelBase.super.ctor(self)
+	BaseModel.super.ctor(self)
 end

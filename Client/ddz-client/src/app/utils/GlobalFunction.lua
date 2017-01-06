@@ -8,6 +8,20 @@
 ]]
 function DebugLog( tag, fmt, ... )
 	if DEBUG > 0 then --打印日志
-		printLog(tag, fmt, ...)
+		if fmt ~= nil then 
+			printLog(tag, fmt, ...)
+		else
+			printInfo(tag, ...)
+		end
+	end
+end
+
+--[[
+	@desc:在调试状态下打印相关日志
+	@param:fmt：调试信息格式，...更多参数
+]]
+function PrintLog( fmt, ... )
+	if DEBUG > 0 then --打印日志
+		printInfo(fmt, ...)
 	end
 end

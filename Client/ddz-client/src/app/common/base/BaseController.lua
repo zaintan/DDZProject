@@ -5,5 +5,5 @@
 BaseController = class("BaseController", AppBase)
 
 function BaseController:ctor(  )
-	AppBase.super.ctor(self)
+	BaseController.super.ctor(self)
 end
