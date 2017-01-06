@@ -3,22 +3,22 @@ cc.net 					= require("framework.cc.net.init")
 
 local SocketManager             = require "app.network.SocketManager"
 
-local MainScene = class("MainScene", function()
-    return display.newScene("MainScene")
+local MainScene = class(SceneManager.MAIN_SCENE, function()
+    return display.newScene(SceneManager.MAIN_SCENE)
 end)
 
 function MainScene:ctor()
 	--cc(self):addComponent("components.behavior.EventProtocol"):exportMethods()
     local mainScene = cc.uiloader:load(VIEW_PATH .. "MainScene.json")
     local wnd1 = cc.uiloader:seekNodeByNameFast(mainScene, "wnd1")
-    -- local wnd2 = cc.uiloader:seekNodeByNameFast(mainScene, "wnd2")
     wnd1:onButtonClicked(function (  )
         WindowManager.getInstance():showWindow(self, WindowId.LoginPopu, {}, WindowStyle.Popu)
     end)
-    -- wnd2:onButtonClicked(function (  )
-    --     WindowManager.getInstance():showWindow(self, WindowId.TestPopu, {}, WindowStyle.Popu)
-    -- end)
     self:addChild(mainScene)
+    local btnRoomScene = cc.uiloader:seekNodeByNameFast(mainScene, "btnRoomScene")
+    btnRoomScene:onButtonClicked(function (  )
+        SceneManager.getInstance():enterScene(SceneManager.ROOM_SCENE)
+    end)
 
     local label = cc.ui.UILabel.new({
             UILabelType = 2, text = "127.0.0.1:10101", size = 64})
@@ -32,15 +32,6 @@ function MainScene:ctor()
 	self.m_socketTcp:addEventListener(SocketManager.EVENT_CONNECT_FAILURE, handler(self,self.onStatus))
 	self.m_socketTcp:addEventListener(SocketManager.EVENT_DATA,            handler(self,self.onData))
     self.m_socketTcp:openSocket()
-
-    self:setKeypadEnabled(true)
-    self:addNodeEventListener(cc.KEYPAD_EVENT, handler(self, self.onKeyPadEvent))
-end
-
---点击返回键
-function MainScene:onKeyPadEvent( event )
-    PrintLog("监听按键, 按键id是：%s，按键名称：%s", tostring(event.key), tostring(event.name))
-    SceneManager.getInstance():dispatchEvent({name = SceneManager.ON_KEYPAD_EVENT, data = event})
 end
 
 function MainScene:onEnter()

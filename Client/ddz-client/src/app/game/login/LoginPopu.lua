@@ -14,6 +14,12 @@ function LoginPopu:addEvent(  )
 	self.btnClose:onButtonClicked(function (  )
 		self:hide()
 	end)
+	:onButtonPressed(function ( event )
+		event.target:setScale(1.2)
+	end)
+	:onButtonRelease(function ( event )
+		event.target:setScale(1.0)
+	end)
 end
 
 function LoginPopu:updateView( data )
