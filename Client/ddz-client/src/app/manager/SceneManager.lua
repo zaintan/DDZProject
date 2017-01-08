@@ -38,6 +38,7 @@ function SceneManager:onKeypadEvent( eventData )
 		if not WindowManager.getInstance():onKeyBack() then --没有窗口关闭了
 			device.showAlert("温馨提示", "您确定要退出游戏吗？", {"确定", "取消"}, function (event)  
 	            if event.buttonIndex == 1 then    
+	            	DiskDataManager.getInstance():saveData()   --保存数据
 	                cc.Director:getInstance():endToLua()  
 	            else    
 	                device.cancelAlert()  --取消对话框   
