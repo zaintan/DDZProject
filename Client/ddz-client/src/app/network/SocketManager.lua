@@ -21,6 +21,8 @@ function SocketManager:ctor(ip, port)
 	self.m_port    	 = port
 	self.m_session 	 = 0
 	self.m_connected = false
+
+	self.m_sessionMap = {}
 end
 
 function SocketManager:openSocket(ip, port)
@@ -38,6 +40,7 @@ function SocketManager:sendMessage(protoName,params)
 
 	local session    = self:_accumulationSession()
 	local sendPacket = request(protoName,params,session)
+	self.m_sessionMap[session] = protoName--记录session 与 protoHead的映射关系
 	local head       = cc.utils.ByteArray.new(cc.utils.ByteArray.ENDIAN_BIG)
 	head:writeShort(#sendPacket)
 	self.m_socketTcp:send(head:getBytes()..sendPacket)
@@ -92,7 +95,11 @@ function SocketManager:_onData(__event)
             break
         end
         local head,session,msg = host:dispatch(v)
-        self:dispatchEvent({name=self.EVENT_DATA, head = head,session = session,data = msg})
+        if self.m_sessionMap[session] then 
+        	head = self.m_sessionMap[session]
+        	self.m_sessionMap[session] = nil
+        end 
+        self:dispatchEvent({name=self.EVENT_DATA, head = head,data = msg})--
     end	
 end 
 

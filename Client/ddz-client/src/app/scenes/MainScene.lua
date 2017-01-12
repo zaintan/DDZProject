@@ -50,7 +50,7 @@ function MainScene:onStatus(__event)
         local handler = nil 
         handler = scheduler.scheduleGlobal(function()
             scheduler.unscheduleGlobal(handler)
-            self.m_socketTcp:sendMessage("login",{smid = "zainmac1990",type = 1})
+            self.m_socketTcp:sendMessage("login",{smid = "zainmac1992",type = 1})
             self.m_socketTcp:sendMessage("createRoom",{level = 1,playtype = 1})
         end,3.0)
         --scheduler(SEL_SCHEDULE selector, float interval, unsigned int repeat, float delay)
@@ -66,6 +66,7 @@ function MainScene:onData(__event)
 end
 
 function MainScene:recvPacketFromServer(head,msgContent)
+    print(head)
     dump(msgContent,"<recv MSG from Server:>")
 end 
 

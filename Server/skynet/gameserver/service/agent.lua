@@ -14,6 +14,8 @@ local send_request
 local CMD = {}
 local REQUEST = {}
 local client_fd
+--local uid
+--local 
 
 --login..根据client传过来simid(唯一标识) 找到账号信息--uid,name,money,ontable状态
 function REQUEST:login()

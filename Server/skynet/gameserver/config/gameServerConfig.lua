@@ -16,7 +16,7 @@ local config = {
     user_redis = {
     	host = '127.0.0.1',--ip_mine,
     	port = 6379,
-    	db   = 0,
+    	db   = 0,--用于分库  默认为0
 	}
 }
 

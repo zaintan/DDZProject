@@ -6,8 +6,8 @@ local rcm = new(redisClientsMgr)
 
 
 local redis_name        = "user_redis"--redis client标识   用于区分不同的redis server
-local redis_uid_tag     = "id_counter"--uid生成器  递增
-local redis_uid_base    = 1000        --uid基
+local redis_uid_tag     = "uid_counter"--uid生成器  递增
+local redis_uid_base    = 100000        --uid基
 
 local redis_uids_key    = "uidsMap"   --smid与uid组成的 hash map 的key值
 local redis_info_key    = "uid_"      --uid+部分装饰 构成的 hashmap 的key值前缀(即:部分装饰)
@@ -46,9 +46,10 @@ end
 
 --新建账号
 local function createUser(smid)
+	Log.e("USER SERVICE","[us. create user]")
 	local ret = {}
 	--生成uid
-	local uid = rcm:INCR(redis_name, redis_uid_tag)--INCRBY 
+	local uid = rcm:INCR(redis_name, redis_uid_tag)--INCR
 	uid = tonumber(uid) + redis_uid_base -- 
 	ret.uid   = uid
 	--生成随机名字
@@ -76,13 +77,18 @@ function CMD.login(info)
 	if #uid <= 0 then --无 则需创建新账号
 		userinfo = createUser(info.smid)
 	else 
-		userinfo = rcm:HMGET(redis_name, redis_info_key..uid[1], "name", "ontable","money")
+		local ret = rcm:HMGET(redis_name, redis_info_key..uid[1], "name", "ontable","money","tid")
+		userinfo  = {}
+		userinfo.username = ret[1]
+		userinfo.ontable  = ret[2]
+		userinfo.money    = ret[3]
+		userinfo.tid      = ret[4]
 	end 
 	Log.dump("[us.login redis ret]",userinfo)
 	return userinfo
 end
 --修改金币 --返回修改结果
-function CMD.changeMoney(newMoney)
+function CMD.changeMoney(uid,newMoney)
 
 end
 --进入桌子 --
