@@ -14,12 +14,13 @@ local send_request
 local CMD = {}
 local REQUEST = {}
 local client_fd
---local uid
---local 
 
+----------------------------------处理来自client的REQUEST
 --login..根据client传过来simid(唯一标识) 找到账号信息--uid,name,money,ontable状态
 function REQUEST:login()
 	local us   = skynet.localname(".userservice")
+	-- local ss = require("utils/socketSend")
+	-- ss.sendMsg(client_fd,"joinRoom",{fid = "100001",uid="1001"})
 	local info = skynet.call(us,"lua","login",{smid = self.smid, type = self.type})
 	return info
 end 
@@ -82,7 +83,9 @@ skynet.register_protocol {
 }
 
 function CMD.start(conf)
-	host = sprotoloader.load(1):host "package"
+	host         = sprotoloader.load(1):host "package"
+	--send_request = host:attach(sprotoloader.load(1))
+
 	client_fd  = conf.client
 	WATCHDOG   = conf.watchdog
 	skynet.call(conf.gate, "lua", "forward", client_fd)
@@ -92,6 +95,13 @@ function CMD.disconnect()
 	-- todo: do something before exit
 	skynet.exit()
 end
+
+-- ----------------------------------主动下发消息给client
+-- function CMD.sendmsg(protoname, params)
+-- 	--local session    = self:_accumulationSession()
+-- 	local sendPacket = send_request(protoname,params,skynet.genid())
+-- 	send_package(sendPacket)
+-- end 
  
 
 skynet.start(function()

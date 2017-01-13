@@ -80,11 +80,12 @@ function CMD.login(info)
 		local ret = rcm:HMGET(redis_name, redis_info_key..uid[1], "name", "ontable","money","tid")
 		userinfo  = {}
 		userinfo.username = ret[1]
-		userinfo.ontable  = ret[2]
+		userinfo.ontable  = ret[2] --or false
 		userinfo.money    = ret[3]
 		userinfo.tid      = ret[4]
 	end 
 	Log.dump("[us.login redis ret]",userinfo)
+	userinfo.ontable = false
 	return userinfo
 end
 --修改金币 --返回修改结果
