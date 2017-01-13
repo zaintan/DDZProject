@@ -41,7 +41,6 @@ joinRoom 3 {
         fid    1 : string
     }
 }
-
 ]]
 
 -- proto.s2c = sprotoparser.parse [[

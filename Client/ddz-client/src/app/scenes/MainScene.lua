@@ -51,7 +51,7 @@ function MainScene:onStatus(__event)
         handler = scheduler.scheduleGlobal(function()
             scheduler.unscheduleGlobal(handler)
             self.m_socketTcp:sendMessage("login",{smid = "zainmac1992",type = 1})
-            self.m_socketTcp:sendMessage("createRoom",{level = 1,playtype = 1})
+            --self.m_socketTcp:sendMessage("createRoom",{level = 1,playtype = 1})
         end,3.0)
         --scheduler(SEL_SCHEDULE selector, float interval, unsigned int repeat, float delay)
         --
@@ -62,11 +62,11 @@ end
 
 function MainScene:onData(__event)
 	--printInfo("socket receive raw data:",__event.data)--, cc.utils.ByteArray.toString(__event.data, 16))
-    self:recvPacketFromServer(__event.head, __event.data)
+    self:recvPacketFromServer(__event.head,__event.protoname, __event.data)
 end
 
-function MainScene:recvPacketFromServer(head,msgContent)
-    print(head)
+function MainScene:recvPacketFromServer(head,protoname,msgContent)
+    print(head,protoname)
     dump(msgContent,"<recv MSG from Server:>")
 end 
 

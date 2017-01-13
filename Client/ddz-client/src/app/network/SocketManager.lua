@@ -94,12 +94,17 @@ function SocketManager:_onData(__event)
         if not v then
             break
         end
+        local protoname = nil
         local head,session,msg = host:dispatch(v)
-        if self.m_sessionMap[session] then 
-        	head = self.m_sessionMap[session]
-        	self.m_sessionMap[session] = nil
+        if head == "REQUEST" then 
+        	protoname = session
+        elseif head == "RESPONSE" then 
+	        if self.m_sessionMap[session] then 
+	        	protoname = self.m_sessionMap[session]
+	        	self.m_sessionMap[session] = nil
+	        end 
         end 
-        self:dispatchEvent({name=self.EVENT_DATA, head = head,data = msg})--
+        self:dispatchEvent({name=self.EVENT_DATA, head = head, protoname = protoname,data = msg})--
     end	
 end 
 
