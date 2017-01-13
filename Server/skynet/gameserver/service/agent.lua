@@ -4,7 +4,7 @@ local socket = require "socket"
 
 local sproto = require "sproto"
 local sprotoloader = require "sprotoloader"
-local queue = require("skynet.queue")
+local queue = require "skynet.queue"
 
 local cs = queue()
 local WATCHDOG
@@ -14,13 +14,14 @@ local send_request
 local CMD = {}
 local REQUEST = {}
 local client_fd
+--local uid
+--local 
 
---login..根据client传过来simid(唯一标识) 找到账号信息
+--login..根据client传过来simid(唯一标识) 找到账号信息--uid,name,money,ontable状态
 function REQUEST:login()
-	print("login sleep before")
-	skynet.sleep(500)
-	print("login sleep end")
-	return {status = 1,msg = "Login Success!",username = "zaintan",ontable = false}
+	local us   = skynet.localname(".userservice")
+	local info = skynet.call(us,"lua","login",{smid = self.smid, type = self.type})
+	return info
 end 
 
 function REQUEST:createRoom()

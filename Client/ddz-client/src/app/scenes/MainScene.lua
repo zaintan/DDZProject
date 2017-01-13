@@ -1,6 +1,5 @@
 cc.utils 				= require("framework.cc.utils.init")
 cc.net 					= require("framework.cc.net.init")
-
 local MainScene = class(SceneManager.MAIN_SCENE, function()
     return display.newScene(SceneManager.MAIN_SCENE)
 end)
