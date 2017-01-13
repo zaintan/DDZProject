@@ -5,7 +5,8 @@ SceneManager = class("SceneManager")
 
 SceneManager.ON_KEYPAD_EVENT = "SM_ON_KEYPAD_EVENT"     --手机按返回键事件
 
-SceneManager.MAIN_SCENE = "MainScene"					--主场景
+SceneManager.LOAD_SCENE = "LoadScene"                   --加载登录场景
+SceneManager.MAIN_SCENE = "MainScene"					--主场景,大厅场景
 SceneManager.ROOM_SCENE = "RoomScene"					--房间场景
 
 function SceneManager:ctor(  )
@@ -65,11 +66,11 @@ function SceneManager:enterScene( name, data )
 	PrintLog("当前场景是：%s", name)
 	--设置按钮监听
 	scene:setKeypadEnabled(true)
-    scene:addNodeEventListener(cc.KEYPAD_EVENT, handler(self, self.onKeyPadEvent))
+    scene:addNodeEventListener(cc.KEYPAD_EVENT, handler(self, self.dispatchKeypadEvent))
 end
 
 --点击返回键
-function SceneManager:onKeyPadEvent( event )
+function SceneManager:dispatchKeypadEvent( event )
     PrintLog("监听按键, 按键id是：%s，按键名称：%s", tostring(event.key), tostring(event.name))
     self:dispatchEvent({name = SceneManager.ON_KEYPAD_EVENT, data = event})
 end
