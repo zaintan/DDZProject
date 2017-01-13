@@ -19,8 +19,6 @@ local client_fd
 --login..根据client传过来simid(唯一标识) 找到账号信息--uid,name,money,ontable状态
 function REQUEST:login()
 	local us   = skynet.localname(".userservice")
-	-- local ss = require("utils/socketSend")
-	-- ss.sendMsg(client_fd,"joinRoom",{fid = "100001",uid="1001"})
 	local info = skynet.call(us,"lua","login",{smid = self.smid, type = self.type})
 	return info
 end 

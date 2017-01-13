@@ -57,44 +57,33 @@ libpng warning: iCCP: known incorrect sRGB profile
 [LUA-print] [INFO] # display.c_top                = 320.00
 [LUA-print] [INFO] # display.c_bottom             = -320.00
 [LUA-print] [INFO] #
-[LUA-print] [INFO] table: 0x0dd48950 [EventProtocol] addEventListener() - event: SM_ON_KEYPAD_EVENT, handle: 1, tag: 
+[LUA-print] [INFO] table: 0x14bf0358 [EventProtocol] addEventListener() - event: SM_ON_KEYPAD_EVENT, handle: 1, tag: 
+[LUA-print] [INFO] LoadScene:ctor
 [LUA-print] [INFO] CCSUILoader - createUINode:SingleNode
 [LUA-print] [INFO] CCSUILoader - createUINode:Sprite
+[LUA-print] [INFO] CCSUILoader - createUINode:Panel
 [LUA-print] [INFO] CCSUILoader - createUINode:Button
 [LUA-print] [INFO] CCSUILoader - createUINode:Button
-[LUA-print] [INFO] userdata: 0x0dd87170 [EventProtocol] addEventListener() - event: CLICKED_EVENT, handle: 1, tag: 
-[LUA-print] [INFO] userdata: 0x0dd8d470 [EventProtocol] addEventListener() - event: CLICKED_EVENT, handle: 1, tag: 
-[LUA-print] [INFO] table: 0x0dd94ef0 [EventProtocol] addEventListener() - event: SM_SOCKET_CONNECTED, handle: 1, tag: 
-[LUA-print] [INFO] table: 0x0dd94ef0 [EventProtocol] addEventListener() - event: SM_SOCKET_CLOSE, handle: 2, tag: 
-[LUA-print] [INFO] table: 0x0dd94ef0 [EventProtocol] addEventListener() - event: SM_SOCKET_CLOSED, handle: 3, tag: 
-[LUA-print] [INFO] table: 0x0dd94ef0 [EventProtocol] addEventListener() - event: SM_SOCKET_CONNECT_FAILURE, handle: 4, tag: 
-[LUA-print] [INFO] table: 0x0dd94ef0 [EventProtocol] addEventListener() - event: SM_SOCKET_DATA, handle: 5, tag: 
-[LUA-print] [INFO] table: 0x0dd96690 [EventProtocol] addEventListener() - event: SOCKET_TCP_CONNECTED, handle: 1, tag: 
-[LUA-print] [INFO] table: 0x0dd96690 [EventProtocol] addEventListener() - event: SOCKET_TCP_CLOSE, handle: 2, tag: 
-[LUA-print] [INFO] table: 0x0dd96690 [EventProtocol] addEventListener() - event: SOCKET_TCP_CLOSED, handle: 3, tag: 
-[LUA-print] [INFO] table: 0x0dd96690 [EventProtocol] addEventListener() - event: SOCKET_TCP_CONNECT_FAILURE, handle: 4, tag: 
-[LUA-print] [INFO] table: 0x0dd96690 [EventProtocol] addEventListener() - event: SOCKET_TCP_DATA, handle: 5, tag: 
+[LUA-print] [INFO] CCSUILoader - createUINode:Text
+[LUA-print] [INFO] userdata: 0x14bfb3c0 [EventProtocol] addEventListener() - event: CLICKED_EVENT, handle: 1, tag: 
+[LUA-print] [INFO] userdata: 0x14c019c0 [EventProtocol] addEventListener() - event: CLICKED_EVENT, handle: 1, tag: 
+[LUA-print] [INFO] table: 0x14befa90 [EventProtocol] addEventListener() - event: SM_SOCKET_CONNECTED, handle: 1, tag: 
+[LUA-print] [INFO] table: 0x14befa90 [EventProtocol] addEventListener() - event: SM_SOCKET_CONNECT_FAILURE, handle: 2, tag: 
+[LUA-print] [INFO] table: 0x19e66470 [EventProtocol] addEventListener() - event: SOCKET_TCP_CONNECTED, handle: 1, tag: 
+[LUA-print] [INFO] table: 0x19e66470 [EventProtocol] addEventListener() - event: SOCKET_TCP_CLOSE, handle: 2, tag: 
+[LUA-print] [INFO] table: 0x19e66470 [EventProtocol] addEventListener() - event: SOCKET_TCP_CLOSED, handle: 3, tag: 
+[LUA-print] [INFO] table: 0x19e66470 [EventProtocol] addEventListener() - event: SOCKET_TCP_CONNECT_FAILURE, handle: 4, tag: 
+[LUA-print] [INFO] table: 0x19e66470 [EventProtocol] addEventListener() - event: SOCKET_TCP_DATA, handle: 5, tag: 
 [LUA-print] [INFO] start connecting ip=[127.0.0.1], port=[10101]
-[LUA-print] [INFO] 当前场景是：MainScene
-[LUA-print] [INFO] table: 0x0dd96690 [EventProtocol] dispatchEvent() - event SOCKET_TCP_CONNECTED
-[LUA-print] [INFO] table: 0x0dd96690 [EventProtocol] dispatchEvent() - dispatching event SOCKET_TCP_CONNECTED to listener 1
+[LUA-print] [INFO] 当前场景是：LoadScene
+[LUA-print] [INFO] LoadScene:onEnter
+[LUA-print] [INFO] table: 0x19e66470 [EventProtocol] dispatchEvent() - event SOCKET_TCP_CONNECTED
+[LUA-print] [INFO] table: 0x19e66470 [EventProtocol] dispatchEvent() - dispatching event SOCKET_TCP_CONNECTED to listener 1
 [LUA-print] [INFO] _onStatusConnected
-[LUA-print] [INFO] table: 0x0dd94ef0 [EventProtocol] dispatchEvent() - event SM_SOCKET_CONNECTED
-[LUA-print] [INFO] table: 0x0dd94ef0 [EventProtocol] dispatchEvent() - dispatching event SM_SOCKET_CONNECTED to listener 1
+[LUA-print] [INFO] table: 0x14befa90 [EventProtocol] dispatchEvent() - event SM_SOCKET_CONNECTED
+[LUA-print] [INFO] table: 0x14befa90 [EventProtocol] dispatchEvent() - dispatching event SM_SOCKET_CONNECTED to listener 1
 [LUA-print] [INFO] socket status: SM_SOCKET_CONNECTED
-[LUA-print] [INFO] table: 0x0dd96690 [EventProtocol] dispatchEvent() - event SOCKET_TCP_DATA
-[LUA-print] [INFO] table: 0x0dd96690 [EventProtocol] dispatchEvent() - dispatching event SOCKET_TCP_DATA to listener 5
-[LUA-print] [INFO] table: 0x0dd94ef0 [EventProtocol] dispatchEvent() - event SM_SOCKET_DATA
-[LUA-print] [INFO] table: 0x0dd94ef0 [EventProtocol] dispatchEvent() - dispatching event SM_SOCKET_DATA to listener 5
-[LUA-print] REQUEST	joinRoom
-[LUA-print] dump from: [string "/Users/tanzhenyu/Desktop/DDZProject/Client/ddz-client/src/app/scenes/MainScene.lua"]:70: in function 'recvPacketFromServer'
-[LUA-print] - "<recv MSG from Server:>" = {
-[LUA-print] - }
-[LUA-print] [INFO] table: 0x0dd94ef0 [EventProtocol] dispatchEvent() - event SM_SOCKET_DATA
-[LUA-print] [INFO] table: 0x0dd94ef0 [EventProtocol] dispatchEvent() - dispatching event SM_SOCKET_DATA to listener 5
-[LUA-print] RESPONSE	login
-[LUA-print] dump from: [string "/Users/tanzhenyu/Desktop/DDZProject/Client/ddz-client/src/app/scenes/MainScene.lua"]:70: in function 'recvPacketFromServer'
-[LUA-print] - "<recv MSG from Server:>" = {
-[LUA-print] -     "ontable"  = false
-[LUA-print] -     "username" = "束啖卶"
-[LUA-print] - }
+[LUA-print] [INFO] table: 0x19e66470 [EventProtocol] dispatchEvent() - event SOCKET_TCP_DATA
+[LUA-print] [INFO] table: 0x19e66470 [EventProtocol] dispatchEvent() - dispatching event SOCKET_TCP_DATA to listener 5
+[LUA-print] [INFO] [Recv Server Data]:[head]=REQUEST,[protoname]=joinRoom,[data]=table: 0x19e6b530
+[LUA-print] [INFO] table: 0x14befa90 [EventProtocol] dispatchEvent() - event SM_SOCKET_DATA

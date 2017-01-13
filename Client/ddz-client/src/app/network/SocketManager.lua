@@ -104,6 +104,7 @@ function SocketManager:_onData(__event)
 	        	self.m_sessionMap[session] = nil
 	        end 
         end 
+        printInfo("[Recv Server Data]:[head]=%s,[protoname]=%s,[data]=%s",head,protoname,tostring(msg))
         self:dispatchEvent({name=self.EVENT_DATA, head = head, protoname = protoname,data = msg})--
     end	
 end 
