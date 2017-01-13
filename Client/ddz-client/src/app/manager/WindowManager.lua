@@ -27,7 +27,6 @@ local WindowLevel = {
 ]]
 WindowId = {      
 	LoginPopu = 1,          --登录弹窗
-	-- TestPopu  = 2,          --test
 }
 
 --[[

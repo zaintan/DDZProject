@@ -127,6 +127,296 @@
                 },
                 "Name": "btnClose",
                 "ctype": "ButtonObjectData"
+              },
+              {
+                "IsCustomSize": true,
+                "FontSize": 30,
+                "LabelText": "登录",
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "ShadowEnabled": true,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 378.0,
+                  "Y": 412.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.4987,
+                  "Y": 0.8374
+                },
+                "PreSize": {
+                  "X": 0.0792,
+                  "Y": 0.0691
+                },
+                "LeftMargin": 348.0,
+                "RightMargin": 350.0,
+                "TopMargin": 63.0,
+                "BottomMargin": 395.0,
+                "Tag": 42,
+                "ActionTag": 752020321,
+                "Size": {
+                  "X": 60.0,
+                  "Y": 34.0
+                },
+                "Name": "txtTitle",
+                "ctype": "TextObjectData"
+              },
+              {
+                "ClipAble": false,
+                "BackColorAlpha": 102,
+                "SingleColor": {},
+                "FirstColor": {
+                  "R": 150,
+                  "G": 200
+                },
+                "EndColor": {},
+                "ColorVector": {
+                  "ScaleY": 1.0
+                },
+                "Scale9Width": 1,
+                "Scale9Height": 1,
+                "TouchEnable": true,
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 168.5,
+                  "Y": 123.999
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.2223,
+                  "Y": 0.252
+                },
+                "PreSize": {
+                  "X": 0.1319,
+                  "Y": 0.2033
+                },
+                "LeftMargin": 168.5,
+                "RightMargin": 489.5,
+                "TopMargin": 268.001,
+                "BottomMargin": 123.999,
+                "Tag": 16,
+                "Children": [
+                  {
+                    "CheckedState": true,
+                    "NormalBackFileData": {
+                      "Type": "Default",
+                      "Path": "Default/CheckBox_Normal.png",
+                      "Plist": ""
+                    },
+                    "PressedBackFileData": {
+                      "Type": "Default",
+                      "Path": "Default/CheckBox_Press.png",
+                      "Plist": ""
+                    },
+                    "DisableBackFileData": {
+                      "Type": "Default",
+                      "Path": "Default/CheckBox_Disable.png",
+                      "Plist": ""
+                    },
+                    "NodeNormalFileData": {
+                      "Type": "Default",
+                      "Path": "Default/CheckBoxNode_Normal.png",
+                      "Plist": ""
+                    },
+                    "NodeDisableFileData": {
+                      "Type": "Default",
+                      "Path": "Default/CheckBoxNode_Disable.png",
+                      "Plist": ""
+                    },
+                    "TouchEnable": true,
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 77.0,
+                      "Y": 59.9996
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.77,
+                      "Y": 0.6
+                    },
+                    "PreSize": {
+                      "X": 0.4,
+                      "Y": 0.4
+                    },
+                    "LeftMargin": 57.0,
+                    "RightMargin": 3.0,
+                    "TopMargin": 20.0004,
+                    "BottomMargin": 39.9996,
+                    "Tag": 17,
+                    "ActionTag": -1798983639,
+                    "Size": {
+                      "X": 40.0,
+                      "Y": 40.0
+                    },
+                    "Name": "cbRemember",
+                    "ctype": "CheckBoxObjectData"
+                  },
+                  {
+                    "IsCustomSize": true,
+                    "FontSize": 20,
+                    "LabelText": "记住密码\n",
+                    "OutlineColor": {
+                      "G": 0,
+                      "B": 0
+                    },
+                    "ShadowColor": {
+                      "R": 110,
+                      "G": 110,
+                      "B": 110
+                    },
+                    "ShadowOffsetX": 2.0,
+                    "ShadowOffsetY": -2.0,
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 148.0002,
+                      "Y": 49.9992
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {
+                      "B": 0
+                    },
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 1.48,
+                      "Y": 0.5
+                    },
+                    "PreSize": {
+                      "X": 0.8,
+                      "Y": 0.46
+                    },
+                    "LeftMargin": 108.0002,
+                    "RightMargin": -88.0002,
+                    "TopMargin": 27.0008,
+                    "BottomMargin": 26.9992,
+                    "Tag": 18,
+                    "ActionTag": 107493536,
+                    "Size": {
+                      "X": 80.0,
+                      "Y": 46.0
+                    },
+                    "Name": "Text_3",
+                    "ctype": "TextObjectData"
+                  }
+                ],
+                "ActionTag": -1657259732,
+                "Size": {
+                  "X": 100.0,
+                  "Y": 100.0
+                },
+                "Name": "Panel_1",
+                "ctype": "PanelObjectData"
+              },
+              {
+                "FontSize": 30,
+                "ButtonText": "登录",
+                "TextColor": {
+                  "R": 65,
+                  "G": 65,
+                  "B": 70
+                },
+                "DisabledFileData": {
+                  "Type": "Default",
+                  "Path": "Default/Button_Disable.png",
+                  "Plist": ""
+                },
+                "PressedFileData": {
+                  "Type": "Default",
+                  "Path": "Default/Button_Press.png",
+                  "Plist": ""
+                },
+                "NormalFileData": {
+                  "Type": "Default",
+                  "Path": "Default/Button_Normal.png",
+                  "Plist": ""
+                },
+                "Scale9Enable": true,
+                "Scale9OriginX": 15,
+                "Scale9OriginY": 11,
+                "Scale9Width": 16,
+                "Scale9Height": 14,
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "TouchEnable": true,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 447.0,
+                  "Y": 180.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5897,
+                  "Y": 0.3659
+                },
+                "PreSize": {
+                  "X": 0.1319,
+                  "Y": 0.1016
+                },
+                "LeftMargin": 397.0,
+                "RightMargin": 261.0,
+                "TopMargin": 287.0,
+                "BottomMargin": 155.0,
+                "Tag": 19,
+                "ActionTag": -1393513491,
+                "Size": {
+                  "X": 100.0,
+                  "Y": 50.0
+                },
+                "Name": "btnLogin",
+                "ctype": "ButtonObjectData"
               }
             ],
             "ActionTag": 263325794,
@@ -136,6 +426,104 @@
             },
             "Name": "bg",
             "ctype": "ImageViewObjectData"
+          },
+          {
+            "ClipAble": false,
+            "BackColorAlpha": 102,
+            "SingleColor": {
+              "R": 150,
+              "G": 200
+            },
+            "FirstColor": {
+              "R": 150,
+              "G": 200
+            },
+            "EndColor": {},
+            "ColorVector": {
+              "ScaleY": 1.0
+            },
+            "TouchEnable": true,
+            "AnchorPoint": {},
+            "Position": {
+              "X": -153.0,
+              "Y": 60.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -153.0,
+            "RightMargin": -147.0,
+            "TopMargin": -110.0,
+            "BottomMargin": 60.0,
+            "Tag": 18,
+            "ActionTag": 754281709,
+            "Size": {
+              "X": 300.0,
+              "Y": 50.0
+            },
+            "Name": "conAccount",
+            "ctype": "PanelObjectData"
+          },
+          {
+            "ClipAble": false,
+            "BackColorAlpha": 102,
+            "SingleColor": {
+              "R": 150,
+              "G": 200
+            },
+            "FirstColor": {
+              "R": 150,
+              "G": 200
+            },
+            "EndColor": {},
+            "ColorVector": {
+              "ScaleY": 1.0
+            },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
+            "TouchEnable": true,
+            "AnchorPoint": {},
+            "Position": {
+              "X": -153.0,
+              "Y": -6.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -153.0,
+            "RightMargin": -147.0,
+            "TopMargin": -44.0,
+            "BottomMargin": -6.0,
+            "Tag": 19,
+            "ActionTag": -401749352,
+            "Size": {
+              "X": 300.0,
+              "Y": 50.0
+            },
+            "Name": "conPwd",
+            "ctype": "PanelObjectData"
           }
         ],
         "Size": {
@@ -147,7 +535,15 @@
       },
       "UsedResources": [
         "../../common/btn_close.png",
-        "../../common/img_tanKuang_9.png"
+        "../../common/img_tanKuang_9.png",
+        "../../Default/Button_Disable.png",
+        "../../Default/Button_Normal.png",
+        "../../Default/Button_Press.png",
+        "../../Default/CheckBox_Disable.png",
+        "../../Default/CheckBox_Normal.png",
+        "../../Default/CheckBox_Press.png",
+        "../../Default/CheckBoxNode_Disable.png",
+        "../../Default/CheckBoxNode_Normal.png"
       ],
       "ctype": "GameFileData"
     }
