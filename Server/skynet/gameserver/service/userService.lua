@@ -29,9 +29,68 @@ local familyNameMap = {
 '万俟','司马','上官','欧阳','夏侯','诸葛','闻人','东方','赫连','皇甫','尉迟','公羊','澹台','公冶','宗政',
 '濮阳','淳于','单于','太叔','申屠','公孙','仲孙','轩辕','令狐','钟离','宇文','长孙','慕容','司徒','司空'
 }
----------------------------------内部函数
---随机中文名
-local function createRandomName()
+
+--redis key zhi
+local l_redis_key = {
+	nick = "nick",
+	ontable = "ontable",
+	coin = "coin",
+	diamond = "diamond",
+	tid = "tid",--table id
+} 
+
+
+--处理user 数据
+local user_service = class();	
+
+user_service.ctor = function ( self )
+	Log.i(Log.tag.user_service, "[user_service]:ctor")
+	
+end
+
+user_service.dtor = function ( self )
+	Log.i(Log.tag.user_service, "[user_service]:dtor")
+end
+
+
+user_service.get_func_by_cmd = function(self, cmd)
+	--local func = user_service.cmd_func_map[cmd];
+	--assert(func);
+	return user_service.cmd_func_map[cmd];--func;
+end
+
+--创建一个user 数据
+user_service.create_user = function ( self, smid )
+	Log.i("[user_service]:create_user"..tostring(simd))
+	if not simd then
+		return nil;
+	end
+
+	local ret = {}
+	--生成uid
+	local uid = self:generate_userid(); 
+	ret.uid   = uid
+	--生成随机名字
+	ret.username  = self:generate_nick();
+	
+	ret.ontable   = false
+	ret.money     = 0
+
+	self:redis_hset(redis_uids_key, smid, uid)
+
+	self:redis_hmset(redis_info_key..uid, l_redis_key.nik,ret.username, l_redis_key.ontable, ret.ontable, l_redis_key.coin, ret.money)
+	return  ret	
+end
+
+--生成 userid
+user_service.generate_userid = function ( self )
+	local uid = self:redis_incr(redis_uid_tag)
+	uid = tonumber(uid) + redis_uid_base 
+	return uid;
+end
+
+--生成随机名字
+user_service.generate_nick = function ( self )
 	local buffer = nil 
 	--0x80-0x7FF的字符用两个字节表示(中文的编码范围)
 	local randIndex = math.random(1,#familyNameMap)
@@ -40,44 +99,65 @@ local function createRandomName()
 	else --复姓
 		buffer = utf8.char(math.random( 0x4e00, 0x9fa5))
 	end
-	return familyNameMap[randIndex]..buffer
-end 
+	return familyNameMap[randIndex]..buffer	
+end
+
+--修改金币
+user_service.modify_coin = function ( self, userid, coin )
+	if not userid then
+		return;
+	end
+
+	coin = tonumber(coin);
+	if not coin then
+		return;
+	end
+
+	self:redis_hset(redis_info_key..userid, l_redis_key.coin, coin)
+end
 
 
---新建账号
-local function createUser(smid)
-	Log.e("USER SERVICE","[us. create user]")
-	local ret = {}
-	--生成uid
-	local uid = rcm:INCR(redis_name, redis_uid_tag)--INCR
-	uid = tonumber(uid) + redis_uid_base -- 
-	ret.uid   = uid
-	--生成随机名字
-	ret.username  = createRandomName()
-	
-	ret.ontable   = false
-	ret.money     = 0
+--修改nick
+user_service.modify_nick= function ( self, userid, nick )
+	if not userid then
+		return;
+	end
 
-	rcm:HMSET(redis_name, redis_uids_key, smid, uid)
-	rcm:HMSET(redis_name, redis_info_key..uid, "name",ret.username, "ontable", ret.ontable, "money", ret.money)
-	return  ret
-end 
+	if type(nick) ~= "string" then
+		return;
+	end
+
+	self:redis_hset(redis_info_key..userid, l_redis_key.nick, nick)
+end
 
 
----------------------------------消息处理
-local CMD = {}
---登录处理  通过smid查询账号信息,不存在则新建账号 -- 返回账号信息
-function CMD.login(info)
-	Log.dump("[us.login recv]",info)
+
+--获取userinfo 通过 userid
+user_service.get_user_by_userid = function ( userid )
+	--local name = self:redis_hmget(redis_info_key..userid, "name")
+end
+
+
+
+--登陆回调处理
+user_service.respone_login = function(self, data)
+	Log.i("[user_service]:respone_login")
+	if not data then
+		Log.i("[user_service]:data is nil")
+		return;
+	end
+
+	Log.dump("[recv]",info)
+
 	local userinfo = nil 
 	--通过smid  从redis查询有无uid
-	local uid = rcm:HMGET(redis_name,redis_uids_key, info.smid)
+	local uid = self:redis_hget(redis_uids_key, data.smid)
 
 	Log.dump("[us.login rcm hmget]",uid)
 	if #uid <= 0 then --无 则需创建新账号
-		userinfo = createUser(info.smid)
+		userinfo = createUser(data.smid)
 	else 
-		local ret = rcm:HMGET(redis_name, redis_info_key..uid[1], "name", "ontable","money","tid")
+		local ret = self:redis_hmget(redis_info_key..uid[1], l_redis_key.nick, l_redis_key.ontable,l_redis_key.coin,l_redis_key.tid)
 		userinfo  = {}
 		userinfo.username = ret[1]
 		userinfo.ontable  = ret[2] --or false
@@ -88,18 +168,46 @@ function CMD.login(info)
 	userinfo.ontable = false
 	return userinfo
 end
---修改金币 --返回修改结果
-function CMD.changeMoney(uid,newMoney)
 
+
+
+--封装redis的相关操作，方便以后修改相关代码
+user_service.redis_hmget = function ( self , key, ...)
+	local ret = rcm:HMGET(redis_name, key, ...)
+	return ret;	
 end
---进入桌子 --
-function CMD.loginTable(tid)
 
-end 
---离开桌子
-function CMD.logoutTable(tid)
+--封装redis的相关操作，方便以后修改相关代码
+user_service.redis_hmset = function ( self , key, ...)
+	rcm:HMSET(redis_name, key, ...)
+end
 
-end 
+--封装redis的相关操作，方便以后修改相关代码
+user_service.redis_hget = function ( self , key, ...)
+	local ret = rcm:HGET(redis_name, key, ...)
+	return ret;	
+end
+
+--封装redis的相关操作，方便以后修改相关代码
+user_service.redis_hset = function ( self , key, ...)
+	rcm:HSET(redis_name, key, ...)
+end
+
+--封装redis的相关操作，方便以后修改相关代码
+user_service.redis_incr = function ( self , key)
+	rcm:INCR(key)
+end
+
+
+
+
+
+--cmd func map
+user_service.cmd_func_map = {
+    ["login"] = user_service.respone_login,
+};
+
+
 
 
 
@@ -108,11 +216,18 @@ skynet.start(function()
 	--注册名字
 	skynet.register('.userservice')
 	--注册消息处理函数
-	skynet.dispatch("lua", function(session, source, cmd, subcmd, ...)
-		local f = assert(CMD[cmd])
-		skynet.ret(skynet.pack(f(subcmd, ...)))
+	skynet.dispatch("lua", function(session, source, cmd, ...);
+		local f = user_service:get_func_by_cmd(cmd);
+		if f then
+			skynet.ret(skynet.pack(f(...)))
+		end
 	end)
 	--初始化redis
 	local cfg  = require("config/gameServerConfig")
 	local succ = rcm:addRedisClient(redis_name,cfg.user_redis)
+    -- test
+	-- user_service:redis_hset("test-", "coin", 101)
+	-- local coin = user_service:redis_hget("test-", "coin")
+	-- Log.i("[test  coin]:",coin)
+	-- Log.i("-----")
 end)
