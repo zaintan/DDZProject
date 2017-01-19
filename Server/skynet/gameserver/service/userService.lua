@@ -61,8 +61,8 @@ end
 
 --创建一个user 数据
 user_service.create_user = function ( self, smid )
-	Log.i("[user_service]:create_user"..tostring(simd))
-	if not simd then
+	Log.i("[user_service]:create_user"..tostring(smid))
+	if not smid then
 		return nil;
 	end
 
@@ -70,22 +70,25 @@ user_service.create_user = function ( self, smid )
 	--生成uid
 	local uid = self:generate_userid(); 
 	ret.uid   = uid
+
 	--生成随机名字
 	ret.username  = self:generate_nick();
-	
+
 	ret.ontable   = false
 	ret.money     = 0
 
 	self:redis_hset(redis_uids_key, smid, uid)
+	self:redis_hmset(redis_info_key..uid, l_redis_key.nick,ret.username, l_redis_key.ontable, ret.ontable, l_redis_key.coin, ret.money)
 
-	self:redis_hmset(redis_info_key..uid, l_redis_key.nik,ret.username, l_redis_key.ontable, ret.ontable, l_redis_key.coin, ret.money)
 	return  ret	
 end
 
 --生成 userid
 user_service.generate_userid = function ( self )
-	local uid = self:redis_incr(redis_uid_tag)
-	uid = tonumber(uid) + redis_uid_base 
+	local uid = self:redis_incr(redis_uid_tag) or 0
+	uid = tonumber(uid) or 0;
+	uid = uid + redis_uid_base 
+	
 	return uid;
 end
 
@@ -147,25 +150,25 @@ user_service.respone_login = function(self, data)
 		return;
 	end
 
-	Log.dump("[recv]",info)
-
+	data.smid = 13
 	local userinfo = nil 
 	--通过smid  从redis查询有无uid
 	local uid = self:redis_hget(redis_uids_key, data.smid)
+	uid = tonumber(uid) or 0
 
-	Log.dump("[us.login rcm hmget]",uid)
-	if #uid <= 0 then --无 则需创建新账号
-		userinfo = createUser(data.smid)
+	if uid <= 0 then --无 则需创建新账号
+		userinfo = self:create_user(data.smid)
 	else 
-		local ret = self:redis_hmget(redis_info_key..uid[1], l_redis_key.nick, l_redis_key.ontable,l_redis_key.coin,l_redis_key.tid)
+		local ret = self:redis_hmget(redis_info_key..uid, l_redis_key.nick, l_redis_key.ontable,l_redis_key.coin,l_redis_key.tid)
 		userinfo  = {}
 		userinfo.username = ret[1]
 		userinfo.ontable  = ret[2] --or false
 		userinfo.money    = ret[3]
 		userinfo.tid      = ret[4]
 	end 
-	Log.dump("[us.login redis ret]",userinfo)
+	
 	userinfo.ontable = false
+	--Log.dump("[recv]",userinfo)
 	return userinfo
 end
 
@@ -195,7 +198,11 @@ end
 
 --封装redis的相关操作，方便以后修改相关代码
 user_service.redis_incr = function ( self , key)
-	rcm:INCR(key)
+	if not key then
+		return nl;
+	end
+
+	return rcm:INCR(key)
 end
 
 
@@ -216,18 +223,18 @@ skynet.start(function()
 	--注册名字
 	skynet.register('.userservice')
 	--注册消息处理函数
-	skynet.dispatch("lua", function(session, source, cmd, ...);
-		local f = user_service:get_func_by_cmd(cmd);
-		if f then
-			skynet.ret(skynet.pack(f(...)))
+	skynet.dispatch("lua", function(session, source, cmd, data);
+		Log.i("cmd:", cmd);
+		Log.dump("data:",data);
+	
+		local param = user_service.cmd_func_map[cmd](user_service,data)
+		Log.dump("param:", param);
+		if param then
+			skynet.ret(skynet.pack(param))
 		end
 	end)
 	--初始化redis
 	local cfg  = require("config/gameServerConfig")
 	local succ = rcm:addRedisClient(redis_name,cfg.user_redis)
-    -- test
-	-- user_service:redis_hset("test-", "coin", 101)
-	-- local coin = user_service:redis_hget("test-", "coin")
-	-- Log.i("[test  coin]:",coin)
-	-- Log.i("-----")
+
 end)
